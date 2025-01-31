@@ -19,13 +19,14 @@ import {
 } from '@loopback/rest';
 import {Pizza} from '../models';
 import {PizzaRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
 export class PizzaController {
   constructor(
     @repository(PizzaRepository)
     public pizzaRepository : PizzaRepository,
   ) {}
-
+  @authenticate('jwt')
   @post('/pizzas')
   @response(200, {
     description: 'Pizza model instance',
